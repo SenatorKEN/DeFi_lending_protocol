@@ -136,3 +136,23 @@
     (ok true)
   )
 )
+
+;; Advanced Oracle Price Update
+(define-public (update-asset-price-source
+  (asset principal)
+  (primary-oracle principal)
+  (backup-oracle principal)
+)
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-UNAUTHORIZED)
+    (map-set oracle-price-sources
+      {asset: asset}
+      {
+        primary-oracle: primary-oracle,
+        backup-oracle: backup-oracle,
+        last-update-timestamp: stacks-block-height
+      }
+    )
+    (ok true)
+  )
+)
