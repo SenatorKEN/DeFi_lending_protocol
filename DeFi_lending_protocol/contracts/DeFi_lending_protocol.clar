@@ -11,7 +11,6 @@
 (define-constant MAX-UINT u340282366920938463463374607431768211455)
 (define-constant PRECISION u1000000)
 
-;; Additional Error Codes
 (define-constant ERR-INSUFFICIENT-LIQUIDITY (err u6))
 (define-constant ERR-TRANSFER-FAILED (err u7))
 (define-constant ERR-ORACLE-FAILURE (err u8))
@@ -40,3 +39,31 @@
   }
 )
 
+(define-map asset-pool
+  {asset: principal}
+  {
+    total-liquidity: uint,
+    available-liquidity: uint,
+    current-utilization-rate: uint
+  }
+)
+
+;; Health Factor Calculation
+(define-private (calculate-health-factor (loan {
+  collateral-amount: uint, 
+  borrowed-amount: uint
+}))
+  (/ 
+    (* (get collateral-amount loan) u100)
+    (get borrowed-amount loan)
+  )
+)
+
+;; Utility Functions
+(define-read-only (get-loan-details (loan-id uint))
+  (map-get? loans {loan-id: loan-id})
+)
+
+(define-read-only (get-user-health-factor (user principal))
+  (default-to u0 (get health-factor (map-get? users {user: user})))
+)
