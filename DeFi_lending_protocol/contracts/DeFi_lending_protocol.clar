@@ -67,3 +67,15 @@
 (define-read-only (get-user-health-factor (user principal))
   (default-to u0 (get health-factor (map-get? users {user: user})))
 )
+
+;; Administrative Functions
+(define-public (update-protocol-parameters
+  (new-liquidation-threshold uint)
+  (new-max-loan-to-value uint)
+)
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-UNAUTHORIZED)
+    ;; Update protocol parameters
+    (ok true)
+  )
+)
