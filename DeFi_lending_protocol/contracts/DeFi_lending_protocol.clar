@@ -156,3 +156,20 @@
     (ok true)
   )
 )
+
+;; Staking Mechanism
+(define-public (stake-tokens
+  (amount uint)
+)
+  (begin
+    (map-set staking-deposits
+      {staker: tx-sender}
+      {
+        total-staked: amount,
+        staking-start-time: stacks-block-height,
+        accumulated-rewards: u0
+      }
+    )
+    (ok true)
+  )
+)
