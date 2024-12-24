@@ -114,3 +114,25 @@
     accumulated-rewards: uint
   }
 )
+
+;; Governance Token Minting
+(define-public (mint-governance-token
+  (amount uint)
+  (recipient principal)
+)
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-UNAUTHORIZED)
+    (ft-mint? LENDING-GOVERNANCE-TOKEN amount recipient)
+  )
+)
+
+;; Protocol Insurance Fund Contribution
+(define-public (contribute-to-insurance-fund
+  (amount uint)
+)
+  (begin
+    (var-set protocol-insurance-fund 
+      (+ (var-get protocol-insurance-fund) amount))
+    (ok true)
+  )
+)
