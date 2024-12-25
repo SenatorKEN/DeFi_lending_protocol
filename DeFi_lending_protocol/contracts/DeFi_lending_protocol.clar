@@ -210,3 +210,15 @@
     last-updated-block: uint
   }
 )
+
+(define-public (claim-rewards)
+  (let (
+    (user tx-sender)
+    (rewards (default-to {pending-rewards: u0, last-updated-block: u0} 
+               (map-get? reward-pool {user: user})))
+  )
+    (asserts! (> (get pending-rewards rewards) u0) ERR-INSUFFICIENT-BALANCE)
+    ;; Transfer rewards to user
+    (ok true)
+  )
+)
