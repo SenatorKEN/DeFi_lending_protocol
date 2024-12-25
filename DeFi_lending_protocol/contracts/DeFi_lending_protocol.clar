@@ -222,3 +222,20 @@
     (ok true)
   )
 )
+
+;; Flash Loan Capability
+(define-public (flash-loan 
+  (asset principal)
+  (amount uint)
+  (callback-contract principal)
+  (callback-function (string-ascii 256))
+)
+  (let (
+    (pool (unwrap! (map-get? asset-pool {asset: asset}) ERR-INSUFFICIENT-LIQUIDITY))
+  )
+    (asserts! (>= (get available-liquidity pool) amount) ERR-INSUFFICIENT-LIQUIDITY)
+    
+    ;; Implement flash loan logic with callback
+    (ok true)
+  )
+)
