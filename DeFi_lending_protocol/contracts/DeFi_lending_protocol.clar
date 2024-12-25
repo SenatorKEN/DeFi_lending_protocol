@@ -341,3 +341,19 @@
     )
   )
 )
+
+;; Cross-Chain Bridge Integration
+(define-public (initiate-cross-chain-transfer
+  (amount uint)
+  (destination-chain (string-ascii 50))
+)
+  (let (
+    (bridge (unwrap! 
+      (map-get? cross-chain-bridges {source-chain: destination-chain}) 
+      ERR-UNAUTHORIZED))
+  )
+    (asserts! (get is-active bridge) ERR-UNAUTHORIZED)
+    ;; Implement cross-chain transfer logic
+    (ok true)
+  )
+)
