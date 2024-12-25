@@ -271,3 +271,13 @@
     last-updated: uint
   }
 )
+
+;; Cross-Chain Compatibility Layer
+(define-map cross-chain-bridges
+  {source-chain: (string-ascii 50)}
+  {
+    bridge-contract: principal,
+    is-active: bool,
+    fee-percentage: uint
+  }
+)
