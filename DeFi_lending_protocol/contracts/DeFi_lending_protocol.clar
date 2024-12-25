@@ -249,3 +249,14 @@
     collateralization-ratio: uint
   }
 )
+
+;; Dynamic Interest Rate Model
+(define-map dynamic-interest-rates
+  {asset: principal}
+  {
+    base-rate: uint,
+    utilization-slope-1: uint,
+    utilization-slope-2: uint,
+    optimal-utilization-rate: uint
+  }
+)
