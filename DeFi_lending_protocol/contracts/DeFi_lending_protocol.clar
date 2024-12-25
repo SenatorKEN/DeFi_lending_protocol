@@ -281,3 +281,20 @@
     fee-percentage: uint
   }
 )
+
+;; Advanced Risk Parameters
+(define-data-var max-loan-to-value uint u750)  ;; 75% LTV
+(define-data-var liquidation-penalty uint u110)  ;; 10% penalty
+
+;; Governance Proposal System
+(define-map governance-proposals
+  {proposal-id: uint}
+  {
+    proposer: principal,
+    description: (string-ascii 200),
+    proposed-changes: (string-ascii 100),
+    votes-for: uint,
+    votes-against: uint,
+    status: (string-ascii 20)
+  }
+)
