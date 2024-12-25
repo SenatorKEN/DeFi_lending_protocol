@@ -260,3 +260,14 @@
     optimal-utilization-rate: uint
   }
 )
+
+;; Credit Scoring Mechanism
+(define-map user-credit-score
+  {user: principal}
+  {
+    score: uint,
+    total-loans: uint,
+    repayment-history: (list 10 bool),
+    last-updated: uint
+  }
+)
