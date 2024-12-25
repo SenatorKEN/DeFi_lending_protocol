@@ -201,3 +201,12 @@
     (ok true)
   )
 )
+
+;; Reward Distribution
+(define-map reward-pool 
+  {user: principal}
+  {
+    pending-rewards: uint,
+    last-updated-block: uint
+  }
+)
