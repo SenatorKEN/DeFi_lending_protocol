@@ -239,3 +239,13 @@
     (ok true)
   )
 )
+
+;; Multi-Asset Collateralization
+(define-map multi-asset-collateral
+  {user: principal}
+  {
+    collateral-assets: (list 10 principal),
+    total-collateral-value: uint,
+    collateralization-ratio: uint
+  }
+)
